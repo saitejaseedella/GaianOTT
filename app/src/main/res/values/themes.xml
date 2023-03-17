@@ -1,0 +1,4 @@
+<resources>
+
+    <style name="Theme.GaianOTT" parent="@style/Theme.Leanback" />
+</resources>
