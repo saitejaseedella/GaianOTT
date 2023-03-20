@@ -56,7 +56,12 @@ class HomeFragment : Fragment() {
         val datalist : DataModel=gson.fromJson(br,DataModel::class.java)
 
         listFragment.bindData(datalist)
+
         listFragment.setOnContentSelectedListener {
+            //Form here the banenr is getting updated
+            //can we implement a onlick function on this banner then
+            //play the vidoe form local source
+            println("updated")
             updateBanner(it)
         }
 
