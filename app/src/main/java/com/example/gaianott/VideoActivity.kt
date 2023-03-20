@@ -23,7 +23,7 @@ class VideoActivity : FragmentActivity() {
         btnBack = findViewById(R.id.btn_back)
         videoView = findViewById(R.id.vv_video)
 
-        movieUrl = intent.extras?.getString("movieurl").toString()
+//        movieUrl = intent.extras?.getString("movieurl").toString()
 
         mediaController = MediaController(this)
         mediaController.setAnchorView(this.videoView)
