@@ -3,20 +3,14 @@ package com.example.gaianott
 import android.os.Bundle
 import android.view.View
 import androidx.leanback.app.RowsSupportFragment
-import androidx.leanback.widget.ArrayObjectAdapter
-import androidx.leanback.widget.FocusHighlight
-import androidx.leanback.widget.HeaderItem
-import androidx.leanback.widget.ListRow
-import androidx.leanback.widget.ListRowPresenter
-import androidx.leanback.widget.OnItemViewSelectedListener
-import androidx.leanback.widget.Presenter
-import androidx.leanback.widget.Row
-import androidx.leanback.widget.RowPresenter
+import androidx.leanback.widget.*
 
 class ListFragment_poster : RowsSupportFragment() {
     private var itemSelectedListener: ((DataModel.Result.Detail) -> Unit)? = null
+    private var itemClickListener: ((DataModel.Result.Detail) -> Unit)? = null
 
-     private var rootAdapter : ArrayObjectAdapter = ArrayObjectAdapter(ListRowPresenter(FocusHighlight.ZOOM_FACTOR_MEDIUM))
+
+    private var rootAdapter : ArrayObjectAdapter = ArrayObjectAdapter(ListRowPresenter(FocusHighlight.ZOOM_FACTOR_MEDIUM))
 
 
 
@@ -26,6 +20,7 @@ class ListFragment_poster : RowsSupportFragment() {
         adapter=rootAdapter
 
         onItemViewSelectedListener = ItemViewSelectedListener()
+        onItemViewClickedListener = ItemViewClickListener()
     }
 
 
@@ -53,6 +48,10 @@ class ListFragment_poster : RowsSupportFragment() {
         this.itemSelectedListener = listener
     }
 
+    fun setOnItemClickListener(listener: (DataModel.Result.Detail) -> Unit) {
+        this.itemClickListener = listener
+    }
+
     inner class ItemViewSelectedListener : OnItemViewSelectedListener{
         override fun onItemSelected(
             itemViewHolder: Presenter.ViewHolder?,
@@ -64,6 +63,20 @@ class ListFragment_poster : RowsSupportFragment() {
                 itemSelectedListener?.invoke(item)
             }
 
+        }
+
+    }
+
+    inner class ItemViewClickListener : OnItemViewClickedListener {
+        override fun onItemClicked(
+            itemViewHolder: Presenter.ViewHolder?,
+            item: Any?,
+            rowViewHolder: RowPresenter.ViewHolder?,
+            row: Row?
+        ) {
+            if (item is DataModel.Result.Detail) {
+                itemClickListener?.invoke(item)
+            }
         }
 
     }

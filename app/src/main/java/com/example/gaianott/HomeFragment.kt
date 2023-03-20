@@ -1,5 +1,6 @@
 package com.example.gaianott
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -65,8 +66,11 @@ class HomeFragment : Fragment() {
             updateBanner(it)
         }
 
-
-
+         listFragment.setOnItemClickListener {
+             val intent  = Intent(requireContext(), VideoActivity::class.java)
+             intent.putExtra("movieurl", it.id)
+             startActivity(intent)
+         }
 
     }
 
